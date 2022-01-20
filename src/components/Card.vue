@@ -1,17 +1,25 @@
 <template>
-  <div>
+  <div class="card-container">
     <button type="button" class="card" @click="showModal()">
       {{ pokemon.name }}
-      <span><img alt="favorite" src="../assets/star1.png" /></span>
+      <span><FavBtn /></span>
     </button>
-    <Modal v-show="isModalVisible" @close="closeModal" :pokemon="pokemon" />
+    <Modal
+      v-show="isModalVisible"
+      @close="closeModal"
+      :name="pokemon.name"
+      :url="pokemon.url"
+    />
   </div>
 </template>
 
 <script>
+import FavBtn from "./Fav-button.vue";
 import Modal from "./Modal.vue";
+
 export default {
   components: {
+    FavBtn,
     Modal,
   },
   data() {
@@ -24,7 +32,7 @@ export default {
   },
   methods: {
     showModal() {
-    this.isModalVisible = true;
+      this.isModalVisible = true;
     },
     closeModal() {
       this.isModalVisible = false;
@@ -34,6 +42,11 @@ export default {
 </script>
 
 <style scoped>
+.card-container {
+  margin: 0;
+  padding: 0;
+}
+
 .card {
   background: #ffffff;
   border: none;
@@ -42,7 +55,13 @@ export default {
   text-transform: capitalize;
   text-align: initial;
   height: 50px;
-  padding-left: 12px;
+  padding: 0 12px;
+  width: 100%;
+  margin: 5px 0;
+  font-size: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .card span {
@@ -52,4 +71,5 @@ export default {
 span img {
   height: 60%;
 }
+
 </style>

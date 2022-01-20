@@ -3,114 +3,165 @@
     <div class="modal">
       <header class="modal-header">
         <div name="header">
-          {{ pokemon.name }}
+          <!-- <img
+            :src="pokemon.sprites.other.home.front_default"
+            alt=""
+            srcset=""
+          /> -->
         </div>
-        <button
-          type="button"
-          class="btn-close"
-          @click="close"
-        >
-          x
+        <button type="button" class="btn-close" @click="close">
+          <img src="../assets/close.png" alt="" srcset="" />
         </button>
       </header>
 
       <section class="modal-body">
-        <slot name="body">
-        </slot>
-       </section>
+        <!-- <p><strong>Name:</strong> {{ pokemon.name }}</p>
+        <hr>
+        <p><strong>Weight:</strong> {{ pokemon.weight }}</p>
+        <hr>
+        <p><strong>Height:</strong> {{ pokemon.height }}</p>
+        <hr>
+        <p>
+          <strong>Types:</strong>
+          <span v-for="type in pokemon.types" :key="type.type.name"
+            >{{ type.type.name }} ,
+          </span>
+        </p> -->
+        <hr>
+      </section>
 
       <footer class="modal-footer">
-        <slot name="footer">
-          This is the default footer!
-        </slot>
-        <button
-          type="button"
-          class="btn-green"
-          @click="close"
-        >
-          Close Modal
-        </button>
+        <Btn text="Share to my friends" styles="red-btn wide-btn" />
       </footer>
     </div>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'Modal',
-    methods: {
-      close() {
-        this.$emit('close');
-      },
+import Btn from "../components/Button.vue";
+export default {
+  name: "Modal",
+  data() {
+    return {
+      pokemon: null,
+    };
+  },
+  async created() {
+    const response = await fetch(this.url);
+    const data = await response.json();
+    this.pokemon = data;
+    console.log(this.pokemon);
+  },
+  components: {
+    Btn,
+  },
+  methods: {
+    close() {
+      this.$emit("close");
     },
-    props: {
-      pokemon: Object,
-    }
-  };
+  },
+  props: {
+    name: String,
+    url: String,
+  },
+};
 </script>
 
 <style>
-  .modal-backdrop {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
 
-  .modal {
-    background: #FFFFFF;
-    box-shadow: 2px 2px 20px 1px;
-    overflow-x: auto;
-    display: flex;
-    flex-direction: column;
-  }
+.modal {
+  background: #ffffff;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  width: 50%;
+  border-radius: 5px;
+}
 
-  .modal-header,
-  .modal-footer {
-    padding: 15px;
-    display: flex;
-  }
+.modal-header,
+.modal-footer {
+  padding: 15px;
+  display: flex;
+}
 
-  .modal-header {
-    position: relative;
-    border-bottom: 1px solid #eeeeee;
-    color: #4AAE9B;
-    justify-content: space-between;
-  }
+.modal-header {
+  position: relative;
+  border-bottom: 1px solid #eeeeee;
+  color: #4aae9b;
+  justify-content: space-between;
+  background-image: url("../assets/background.png");
+  background-size: cover;
+  height: 40%;
+}
 
-  .modal-footer {
-    border-top: 1px solid #eeeeee;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
+.modal-header div {
+  width: 100%;
+}
 
-  .modal-body {
-    position: relative;
-    padding: 20px 10px;
-  }
+.modal-header img {
+  margin: auto;
+  height: 100%;
+}
 
-  .btn-close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    border: none;
-    font-size: 20px;
-    padding: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    color: #4AAE9B;
-    background: transparent;
-  }
+.modal-footer {
+  border-top: 1px solid #eeeeee;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 
-  .btn-green {
-    color: white;
-    background: #4AAE9B;
-    border: 1px solid #4AAE9B;
-    border-radius: 2px;
-  }
+.modal-body {
+  position: relative;
+  padding: 20px 40px;
+  text-align: initial;
+}
+
+.modal-body p {
+  text-transform: capitalize;
+}
+
+.modal-body strong {
+  font-weight: 800;
+}
+
+.modal-body hr {
+  border-bottom: 1px #eeeeeef6;
+  width: 100%;
+}
+
+.btn-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  font-size: 20px;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #4aae9b;
+  background: transparent;
+}
+
+.btn-close img {
+  height: 30px;
+}
+
+.btn-green {
+  color: white;
+  background: #4aae9b;
+  border: 1px solid #4aae9b;
+  border-radius: 2px;
+}
 </style>
