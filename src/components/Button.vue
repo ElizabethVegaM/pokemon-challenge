@@ -23,7 +23,7 @@ button {
   border-radius: 60px;
   font-weight: 800;
   letter-spacing: 1px;
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .red-btn {
@@ -35,7 +35,7 @@ button {
 }
 
 .normal-btn {
-  width: 131px;
+  width: 160px;
 }
 
 .wide-btn {

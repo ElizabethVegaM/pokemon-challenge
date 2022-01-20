@@ -32,6 +32,7 @@
 
       <footer class="modal-footer">
         <Btn text="Share to my friends" styles="red-btn wide-btn" />
+        <FavBtn />
       </footer>
     </div>
   </div>
@@ -39,6 +40,7 @@
 
 <script>
 import Btn from "../components/Button.vue";
+import FavBtn from "../components/Fav-button.vue";
 export default {
   name: "Modal",
   data() {
@@ -54,6 +56,7 @@ export default {
   },
   components: {
     Btn,
+    FavBtn,
   },
   methods: {
     close() {
@@ -118,8 +121,7 @@ export default {
 
 .modal-footer {
   border-top: 1px solid #eeeeee;
-  flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-evenly;
 }
 
 .modal-body {
@@ -156,12 +158,5 @@ export default {
 
 .btn-close img {
   height: 30px;
-}
-
-.btn-green {
-  color: white;
-  background: #4aae9b;
-  border: 1px solid #4aae9b;
-  border-radius: 2px;
 }
 </style>

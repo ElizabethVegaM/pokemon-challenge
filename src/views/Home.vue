@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     toMain: function () {
-      this.$router.push("main");
+      this.$router.push("loading");
     },
   },
 };
