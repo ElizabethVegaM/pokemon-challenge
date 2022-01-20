@@ -1,30 +1,33 @@
 <template>
-  <img alt="Pikamchu logo" src="./assets/pikachu.png">
-  <WelcomePage />
+  <!-- <div id="nav">
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  </div> -->
+  <router-view/>
 </template>
-
-<script>
-import WelcomePage from './components/WelcomePage.vue'
-
-export default {
-  name: 'App',
-  components: {
-    WelcomePage
-  }
-}
-</script>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 body {
   background-color: #E5E5E5;
+  color: #353535;
+  margin: 0;
+  padding: 0;
+}
+
+* {
   font-family: 'Lato', sans-serif;
 }
 
 #app {
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-  
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+p {
+  color: #5E5E5E;
 }
 </style>

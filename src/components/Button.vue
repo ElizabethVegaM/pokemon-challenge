@@ -23,4 +23,8 @@ export default {
   color: #fff;
   align-self: center;
 }
+
+.button:hover {
+  background: #C00E20;
+}
 </style>
