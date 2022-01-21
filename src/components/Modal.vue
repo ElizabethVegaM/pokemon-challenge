@@ -15,22 +15,31 @@
 
       <section class="modal-body">
         <p><strong>Name:</strong> {{ pokemon.name }}</p>
-        <hr>
+        <hr />
         <p><strong>Weight:</strong> {{ pokemon.weight }}</p>
-        <hr>
+        <hr />
         <p><strong>Height:</strong> {{ pokemon.height }}</p>
-        <hr>
+        <hr />
         <p>
           <strong>Types: </strong>
           <span v-for="type in pokemon.types" :key="type.type.name"
             >{{ type.type.name }} ,
           </span>
         </p>
-        <hr>
+        <hr />
       </section>
-
       <footer class="modal-footer">
-        <Btn text="Share to my friends" styles="active wide-btn" />
+        <Btn
+          text="Share to my friends"
+          styles="active wide-btn"
+          @click="handleCopy"
+        />
+        <input
+          v-on:focus="$event.target.select()"
+          ref="clone"
+          readonly
+          :value="text"
+        />
         <FavBtn v-bind="pokemon" :pokemon="pokemon" />
       </footer>
     </div>
@@ -46,9 +55,19 @@ export default {
     Btn,
     FavBtn,
   },
+  data() {
+    return {
+      text: `name: ${this.pokemon.name}, height: ${this.pokemon.height}, weight: ${this.pokemon.weight}, type: ${this.pokemon.types[0].type.name}`,
+    };
+  },
   methods: {
     close() {
       this.$emit("close");
+    },
+    handleCopy() {
+      this.$refs.clone.focus();
+      document.execCommand("copy");
+      alert('Text copied!')
     },
   },
   props: {
@@ -146,6 +165,12 @@ export default {
   height: 30px;
 }
 
+.modal-footer input {
+  z-index: -100;
+  position: absolute;
+  bottom: 20vh;
+}
+
 @media (max-width: 480px) {
   .modal {
     width: 90%;
@@ -157,9 +182,9 @@ export default {
     font-size: 18px;
     margin: 0;
   }
-  .modal-header, .modal-footer {
+  .modal-header,
+  .modal-footer {
     padding: 15px;
   }
 }
-
 </style>
