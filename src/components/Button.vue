@@ -8,6 +8,7 @@ export default {
   props: {
     text: String,
     styles: String,
+    isActive: Boolean,
   },
 };
 </script>
@@ -26,11 +27,15 @@ button {
   font-size: 20px;
 }
 
-.red-btn {
+.active {
   background: #f22539;
 }
 
-.red-btn:hover {
+.inactive {
+  background: #bfbfbf;
+}
+
+.active:hover {
     background: #C00E20;
 }
 

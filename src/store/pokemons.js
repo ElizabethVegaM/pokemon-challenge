@@ -37,7 +37,7 @@ export default function usePokemons() {
   }
 
   const checkIfFavorite = (pokemon) => {
-    state.favPokemons.includes(pokemon);
+    return state.favPokemons.includes(pokemon);
   }
 
   const addToFavorites = (pokemon) => {
@@ -50,6 +50,10 @@ export default function usePokemons() {
     console.log(state.favPokemons);
   }
 
+  const showFavorites = (option) => {
+    return option ? state.favPokemons : state.pokemons;
+  }
+
   return {
       ...toRefs(state),
       fetchPokemons,
@@ -57,5 +61,6 @@ export default function usePokemons() {
       checkIfFavorite,
       addToFavorites,
       removeFromFavorites,
+      showFavorites,
   }
 }

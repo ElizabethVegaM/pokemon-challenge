@@ -30,7 +30,7 @@
       </section>
 
       <footer class="modal-footer">
-        <Btn text="Share to my friends" styles="red-btn wide-btn" />
+        <Btn text="Share to my friends" styles="active wide-btn" />
         <FavBtn v-bind="pokemon" :pokemon="pokemon" />
       </footer>
     </div>

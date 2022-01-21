@@ -1,6 +1,6 @@
 <template>
   <button type="button" class="round-btn" @click="handleClick()">
-    <img v-if="isFavorite" src="../assets/starfav.png" alt="" srcset="" />
+    <img v-if="isFavorite === true" src="../assets/starfav.png" alt="" srcset="" />
     <img v-else src="../assets/stardef.png" alt="" srcset="" />
   </button>
 </template>
@@ -22,11 +22,14 @@ export default {
   },
   data() {
     return {
-      isFavorite: false,
+      isFavorite: this.checkIfFavorite(this.pokemon),
     };
   },
-  created() {
-    this.isFavorite = this.checkIfFavorite(this.pokemon)
+  beforeCreate() {
+    this.isFavorite = this.checkIfFavorite(this.pokemon);
+  },
+  updated() {
+    this.isFavorite = this.checkIfFavorite(this.pokemon);
   },
   props: {
     pokemon: Object,

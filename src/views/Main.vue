@@ -10,7 +10,15 @@
       v-model="inputData"
       @keydown.enter="handleInput"
     />
-    <section v-if="pokemons.length > 0" class="list-container">
+    <section v-if="showFavorites && favPokemons.length > 0" class="list-container">
+        <Card
+          v-for="pokemon in favPokemons"
+          :key="pokemon.name"
+          v-bind="pokemon"
+          :pokemon="pokemon"
+        />
+    </section>
+    <section v-else-if="!showFavorites && pokemons.length > 0" class="list-container">
       <Card
         v-for="pokemon in pokemons"
         :key="pokemon.name"
@@ -21,12 +29,17 @@
     <section v-else class="list-container">
       <h1>Uh-Oh!</h1>
       <p>You look lost on your journey!</p>
-      <Btn text="Go back home" styles="red-btn wide-btn" @click="backHome" />
+      <Btn text="Go back home" styles="active wide-btn" @click="backHome" />
     </section>
     <footer>
       <section>
-        <Btn text="All" styles="red-btn wide-btn" />
-        <Btn text="Favorites" styles="red-btn wide-btn" />
+        <Btn text="All" :class="{ active: !showFavorites }" styles="wide-btn" @click="showFavs(false)" />
+        <Btn
+          :class="{ active: showFavorites }"
+          text="Favorites"
+          styles="wide-btn"
+          @click="showFavs(true)"
+        />
       </section>
     </footer>
   </div>
@@ -41,7 +54,8 @@ import Card from "../components/Card.vue";
 
 export default {
   setup() {
-    const { pokemons, fetchPokemons, fetchPokemonData, favPokemons, loading } = usePokemons();
+    const { pokemons, fetchPokemons, fetchPokemonData, favPokemons, loading } =
+      usePokemons();
 
     onMounted(() => {
       fetchPokemons();
@@ -51,7 +65,7 @@ export default {
       pokemons,
       favPokemons,
       loading,
-      fetchPokemonData
+      fetchPokemonData,
     };
   },
   components: {
@@ -61,15 +75,21 @@ export default {
   },
   data() {
     return {
-      isModalVisible: false,
+      showFavorites: false,
     };
   },
   methods: {
     handleInput() {
-      this.fetchPokemonData("https://pokeapi.co/api/v2/pokemon/"+this.inputData)
+      this.fetchPokemonData(
+        "https://pokeapi.co/api/v2/pokemon/" + this.inputData
+      );
     },
     backHome() {
       this.$router.push("/");
+    },
+    showFavs(option) {
+      console.log(this);
+      this.showFavorites = option;
     },
   },
 };
