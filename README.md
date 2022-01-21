@@ -1,24 +1,14 @@
 # pokemon-challenge
 
-## Project setup
-```
-npm install
-```
+App que muestra una lista de pokemones que puedes agregar a tus favoritos.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Tecnologías usadas 🛠️
 
-### Compiles and minifies for production
-```
-npm run build
-```
+* Vue 3.0.0
+* Vue Router 4.0.0
+* Vanilla CSS
+* [Animista CSS](http://animista.net) para animar la pokebola
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Despliegue 📦
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Puedes ver el resultado de este proyecto [acá](http://animista.net).
