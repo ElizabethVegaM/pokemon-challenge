@@ -107,7 +107,6 @@ export default {
 }
 
 .modal-footer {
-  border-top: 1px solid #eeeeee;
   justify-content: space-evenly;
 }
 
@@ -126,7 +125,7 @@ export default {
 }
 
 .modal-body hr {
-  border-bottom: 1px #eeeeeef6;
+  border-bottom: 0.5px solid #eeeeee;
   width: 100%;
 }
 
@@ -146,4 +145,21 @@ export default {
 .btn-close img {
   height: 30px;
 }
+
+@media (max-width: 480px) {
+  .modal {
+    width: 90%;
+  }
+  .modal-body {
+    padding: 25px;
+  }
+  .modal-body p {
+    font-size: 18px;
+    margin: 0;
+  }
+  .modal-header, .modal-footer {
+    padding: 15px;
+  }
+}
+
 </style>

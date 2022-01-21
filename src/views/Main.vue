@@ -52,12 +52,16 @@
       <section>
         <Btn
           text="All"
+          hasIcon
+          filename="list.png"
           :class="{ active: !showFavorites }"
           styles="wide-btn"
           @click="showFavs(false)"
         />
         <Btn
           :class="{ active: showFavorites }"
+          hasIcon
+          filename="starwhite.png"
           text="Favorites"
           styles="wide-btn"
           @click="showFavs(true)"
@@ -76,8 +80,14 @@ import Card from "../components/Card.vue";
 
 export default {
   setup() {
-    const { pokemons, fetchPokemons, fetchPokemonData, favPokemons, searchPokemon, loading } =
-      usePokemons();
+    const {
+      pokemons,
+      fetchPokemons,
+      fetchPokemonData,
+      favPokemons,
+      searchPokemon,
+      loading,
+    } = usePokemons();
 
     onMounted(() => {
       fetchPokemons();
@@ -98,17 +108,17 @@ export default {
   },
   data() {
     return {
-      showSearch: false, 
+      showSearch: false,
       showFavorites: false,
     };
   },
   methods: {
     handleInput() {
       if (this.inputData) {
-      this.fetchPokemonData(
-        "https://pokeapi.co/api/v2/pokemon/" + this.inputData
-      );
-      this.showSearch = true;
+        this.fetchPokemonData(
+          "https://pokeapi.co/api/v2/pokemon/" + this.inputData
+        );
+        this.showSearch = true;
       }
     },
     backHome() {
@@ -157,5 +167,11 @@ footer section {
   display: flex;
   justify-content: space-evenly;
   margin: auto;
+}
+
+@media (max-width: 480px) {
+  footer section {
+    width: 90%;
+  }
 }
 </style>

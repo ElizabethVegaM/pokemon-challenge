@@ -53,4 +53,11 @@
             transform: rotate(360deg);
   }
 }
+
+@media (max-width: 480px) {
+ .pokeball {
+   width: 100px;
+   height: 100px;
+ }
+}
 </style>

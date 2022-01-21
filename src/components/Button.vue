@@ -1,5 +1,13 @@
 <template>
-  <button type="button" :class="styles">{{ text }}</button>
+  <button type="button" :class="styles">
+    <img
+      v-if="hasIcon"
+      :src="require(`@/assets/${filename}`)"
+      alt=""
+      srcset=""
+    />
+    {{ text }}
+  </button>
 </template>
 
 <script>
@@ -9,6 +17,8 @@ export default {
     text: String,
     styles: String,
     isActive: Boolean,
+    hasIcon: Boolean,
+    filename: String,
   },
 };
 </script>
@@ -27,6 +37,10 @@ button {
   font-size: 20px;
 }
 
+button img {
+  height: 80%;
+}
+
 .active {
   background: #f22539;
 }
@@ -36,7 +50,7 @@ button {
 }
 
 .active:hover {
-    background: #C00E20;
+  background: #c00e20;
 }
 
 .normal-btn {
@@ -47,5 +61,4 @@ button {
   width: 80%;
   margin-right: 5px;
 }
-
 </style>

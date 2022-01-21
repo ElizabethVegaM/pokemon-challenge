@@ -4,7 +4,7 @@
     <h1>Welcome to Pokédex</h1>
     <p>
       The digital encyclopedia created by Professor Oak is an invaluable tool to
-      Trainers in the Pokémon world..
+      Trainers in the Pokémon world.
     </p>
     <Btn text="Get started" @click="toMain()" styles="active normal-btn" />
   </div>
@@ -33,7 +33,19 @@ export default {
 }
 
 img {
-  max-width: 40%;
+  width: 50%;
   margin: 50px auto;
+}
+
+@media (max-width: 480px) {
+  img {
+    width: 100%;
+  }
+  h1 {
+    font-size: 26px;
+  }
+  p {
+    font-size: 18px;
+  }
 }
 </style>

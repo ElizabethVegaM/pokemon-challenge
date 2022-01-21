@@ -26,4 +26,10 @@ body {
 p {
   color: #5e5e5e;
 }
+
+@media (max-width: 480px) {
+  #app {
+    width: 90%;
+  }
+}
 </style>

@@ -55,7 +55,6 @@ export default {
   border-radius: 5px;
   height: 50px;
   padding: 0 12px;
-  width: 100%;
   margin: 5px 0;
   display: flex;
   justify-content: space-between;
