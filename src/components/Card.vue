@@ -1,16 +1,18 @@
 <template>
-  <div class="card-container">
-    <button type="button" class="card" @click="showModal()">
-      {{ pokemon.name }}
-      <span><FavBtn /></span>
-    </button>
+  <section class="card-container">
+    <div>
+      <button type="button" class="card" @click="showModal()">
+        {{ pokemon.name }}
+      </button>
+      <FavBtn v-bind="pokemon" :pokemon="pokemon" />
+    </div>
     <Modal
       v-show="isModalVisible"
       @close="closeModal"
-      :name="pokemon.name"
-      :url="pokemon.url"
+      v-bind="pokemon"
+      :pokemon="pokemon"
     />
-  </div>
+  </section>
 </template>
 
 <script>
@@ -25,6 +27,7 @@ export default {
   data() {
     return {
       isModalVisible: false,
+      isPokemonFavorite: false,
     };
   },
   props: {
@@ -71,5 +74,4 @@ export default {
 span img {
   height: 60%;
 }
-
 </style>

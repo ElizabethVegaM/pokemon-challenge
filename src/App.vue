@@ -1,20 +1,18 @@
 <template>
-  <transition name="fade">
-    <router-view/>
-  </transition>
+  <router-view />
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 body {
-  background-color: #E5E5E5;
+  background-color: #e5e5e5;
   color: #353535;
   margin: 0;
   padding: 0;
 }
 
 * {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 #app {
@@ -26,6 +24,6 @@ body {
 }
 
 p {
-  color: #5E5E5E;
+  color: #5e5e5e;
 }
 </style>

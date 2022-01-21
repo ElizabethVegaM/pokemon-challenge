@@ -6,7 +6,7 @@
       The digital encyclopedia created by Professor Oak is an invaluable tool to
       Trainers in the Pokémon world..
     </p>
-    <Btn text="Get started" v-on:click="toMain()" styles="normal-btn red-btn" />
+    <Btn text="Get started" @click="toMain()" styles="normal-btn red-btn" />
   </div>
 </template>
 
@@ -17,12 +17,9 @@ export default {
   components: {
     Btn,
   },
-  props: {
-    msg: String,
-  },
   methods: {
     toMain: function () {
-      this.$router.push("loading");
+      this.$router.push("main");
     },
   },
 };

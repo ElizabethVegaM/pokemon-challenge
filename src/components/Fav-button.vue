@@ -1,15 +1,46 @@
 <template>
-  <button type="button" class="round-btn">
-    <img v-if="isFavorite" src="../assets/starfav.png" alt="" srcset="">
-    <img v-if="!isFavorite" src="../assets/stardef.png" alt="" srcset="">
+  <button type="button" class="round-btn" @click="handleClick()">
+    <img v-if="isFavorite" src="../assets/starfav.png" alt="" srcset="" />
+    <img v-else src="../assets/stardef.png" alt="" srcset="" />
   </button>
 </template>
 
 <script>
+// import { onMounted } from "vue";
+import usePokemons from "../store/pokemons.js";
+
 export default {
   name: "FavBtn",
+  setup() {
+    const { checkIfFavorite, addToFavorites, removeFromFavorites } = usePokemons();
+
+    return {
+      checkIfFavorite,
+      addToFavorites,
+      removeFromFavorites,
+    };
+  },
+  data() {
+    return {
+      isFavorite: false,
+    };
+  },
+  created() {
+    this.isFavorite = this.checkIfFavorite(this.pokemon)
+  },
   props: {
-    isFavorite: Boolean,
+    pokemon: Object,
+  },
+  methods: {
+    handleClick() {
+      if (this.checkIfFavorite(this.pokemon)) {
+        this.removeFromFavorites(this.pokemon);
+        this.isFavorite = false;
+      } else {
+        this.addToFavorites(this.pokemon);
+        this.isFavorite = true;
+      }
+    },
   },
 };
 </script>
@@ -29,5 +60,4 @@ export default {
 .round-btn img {
   height: 100%;
 }
-
 </style>

@@ -1,13 +1,27 @@
 <template>
-  <div class="main-container">
-    <input type="text" placeholder="Search" class="search-input" />
-    <section class="list-container">
+  <div v-if="loading">
+    <Loading />
+  </div>
+  <div v-else class="main-container">
+    <input
+      type="text"
+      placeholder="Search"
+      class="search-input"
+      v-model="inputData"
+      @keydown.enter="handleInput"
+    />
+    <section v-if="pokemons.length > 0" class="list-container">
       <Card
-        v-for="pokemon in data"
+        v-for="pokemon in pokemons"
         :key="pokemon.name"
         v-bind="pokemon"
         :pokemon="pokemon"
       />
+    </section>
+    <section v-else class="list-container">
+      <h1>Uh-Oh!</h1>
+      <p>You look lost on your journey!</p>
+      <Btn text="Go back home" styles="red-btn wide-btn" @click="backHome" />
     </section>
     <footer>
       <section>
@@ -19,24 +33,44 @@
 </template>
 
 <script>
+import { onMounted } from "vue";
+import usePokemons from "../store/pokemons.js";
+import Loading from "../components/Loading.vue";
 import Btn from "../components/Button.vue";
 import Card from "../components/Card.vue";
 
 export default {
+  setup() {
+    const { pokemons, fetchPokemons, fetchPokemonData, favPokemons, loading } = usePokemons();
+
+    onMounted(() => {
+      fetchPokemons();
+    });
+
+    return {
+      pokemons,
+      favPokemons,
+      loading,
+      fetchPokemonData
+    };
+  },
   components: {
     Btn,
     Card,
+    Loading,
   },
   data() {
     return {
-      data: null,
       isModalVisible: false,
     };
   },
-  async created() {
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon");
-    const data = await response.json();
-    this.data = data.results;
+  methods: {
+    handleInput() {
+      this.fetchPokemonData("https://pokeapi.co/api/v2/pokemon/"+this.inputData)
+    },
+    backHome() {
+      this.$router.push("/");
+    },
   },
 };
 </script>

@@ -3,11 +3,10 @@
     <div class="modal">
       <header class="modal-header">
         <div name="header">
-          <!-- <img
+          <img
             :src="pokemon.sprites.other.home.front_default"
-            alt=""
-            srcset=""
-          /> -->
+            :alt="pokemon.name + 'front picture'"
+          />
         </div>
         <button type="button" class="btn-close" @click="close">
           <img src="../assets/close.png" alt="" srcset="" />
@@ -15,24 +14,24 @@
       </header>
 
       <section class="modal-body">
-        <!-- <p><strong>Name:</strong> {{ pokemon.name }}</p>
+        <p><strong>Name:</strong> {{ pokemon.name }}</p>
         <hr>
         <p><strong>Weight:</strong> {{ pokemon.weight }}</p>
         <hr>
         <p><strong>Height:</strong> {{ pokemon.height }}</p>
         <hr>
         <p>
-          <strong>Types:</strong>
+          <strong>Types: </strong>
           <span v-for="type in pokemon.types" :key="type.type.name"
             >{{ type.type.name }} ,
           </span>
-        </p> -->
+        </p>
         <hr>
       </section>
 
       <footer class="modal-footer">
         <Btn text="Share to my friends" styles="red-btn wide-btn" />
-        <FavBtn />
+        <FavBtn v-bind="pokemon" :pokemon="pokemon" />
       </footer>
     </div>
   </div>
@@ -43,17 +42,6 @@ import Btn from "../components/Button.vue";
 import FavBtn from "../components/Fav-button.vue";
 export default {
   name: "Modal",
-  data() {
-    return {
-      pokemon: null,
-    };
-  },
-  async created() {
-    const response = await fetch(this.url);
-    const data = await response.json();
-    this.pokemon = data;
-    console.log(this.pokemon);
-  },
   components: {
     Btn,
     FavBtn,
@@ -64,8 +52,7 @@ export default {
     },
   },
   props: {
-    name: String,
-    url: String,
+    pokemon: Object,
   },
 };
 </script>

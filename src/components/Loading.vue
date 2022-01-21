@@ -4,16 +4,6 @@
   </section>
 </template>
 
-<script>
-export default {
-  mounted() {
-    setTimeout(() => {
-      this.$router.push("main");
-    }, 4000);
-  },
-};
-</script>
-
 <style scoped>
 .ball-container {
   width: 50%;
