@@ -1,7 +1,7 @@
 <template>
   <section class="card-container">
-    <div>
-      <button type="button" class="card" @click="showModal()">
+    <div class="card">
+      <button class="pokemon-list" type="button" @click="showModal()">
         {{ pokemon.name }}
       </button>
       <FavBtn v-bind="pokemon" :pokemon="pokemon" />
@@ -52,19 +52,23 @@ export default {
 
 .card {
   background: #ffffff;
-  border: none;
-  list-style: none;
   border-radius: 5px;
-  text-transform: capitalize;
-  text-align: initial;
   height: 50px;
   padding: 0 12px;
   width: 100%;
   margin: 5px 0;
-  font-size: 22px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.card .pokemon-list {
+  border: none;
+  font-size: 22px;
+  text-align: initial;
+  text-transform: capitalize;
+  background: transparent;
+  width: 100%;
 }
 
 .card span {

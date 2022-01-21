@@ -10,17 +10,34 @@
       v-model="inputData"
       @keydown.enter="handleInput"
     />
-    <section v-if="showFavorites && favPokemons.length > 0" class="list-container">
-        <Card
-          v-for="pokemon in favPokemons"
-          :key="pokemon.name"
-          v-bind="pokemon"
-          :pokemon="pokemon"
-        />
+    <section
+      v-if="showFavorites && favPokemons.length > 0"
+      class="list-container"
+    >
+      <Card
+        v-for="pokemon in favPokemons"
+        :key="pokemon.name"
+        v-bind="pokemon"
+        :pokemon="pokemon"
+      />
     </section>
-    <section v-else-if="!showFavorites && pokemons.length > 0" class="list-container">
+    <section
+      v-else-if="!showFavorites && !showSearch && pokemons.length > 0"
+      class="list-container"
+    >
       <Card
         v-for="pokemon in pokemons"
+        :key="pokemon.name"
+        v-bind="pokemon"
+        :pokemon="pokemon"
+      />
+    </section>
+    <section
+      v-else-if="showSearch && !showFavorites && searchPokemon.length > 0"
+      class="list-container"
+    >
+      <Card
+        v-for="pokemon in searchPokemon"
         :key="pokemon.name"
         v-bind="pokemon"
         :pokemon="pokemon"
@@ -33,7 +50,12 @@
     </section>
     <footer>
       <section>
-        <Btn text="All" :class="{ active: !showFavorites }" styles="wide-btn" @click="showFavs(false)" />
+        <Btn
+          text="All"
+          :class="{ active: !showFavorites }"
+          styles="wide-btn"
+          @click="showFavs(false)"
+        />
         <Btn
           :class="{ active: showFavorites }"
           text="Favorites"
@@ -54,7 +76,7 @@ import Card from "../components/Card.vue";
 
 export default {
   setup() {
-    const { pokemons, fetchPokemons, fetchPokemonData, favPokemons, loading } =
+    const { pokemons, fetchPokemons, fetchPokemonData, favPokemons, searchPokemon, loading } =
       usePokemons();
 
     onMounted(() => {
@@ -65,6 +87,7 @@ export default {
       pokemons,
       favPokemons,
       loading,
+      searchPokemon,
       fetchPokemonData,
     };
   },
@@ -75,21 +98,25 @@ export default {
   },
   data() {
     return {
+      showSearch: false, 
       showFavorites: false,
     };
   },
   methods: {
     handleInput() {
+      if (this.inputData) {
       this.fetchPokemonData(
         "https://pokeapi.co/api/v2/pokemon/" + this.inputData
       );
+      this.showSearch = true;
+      }
     },
     backHome() {
       this.$router.push("/");
     },
     showFavs(option) {
-      console.log(this);
       this.showFavorites = option;
+      this.showSearch = option;
     },
   },
 };
