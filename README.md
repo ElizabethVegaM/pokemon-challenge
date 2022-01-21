@@ -11,4 +11,4 @@ App que muestra una lista de pokemones que puedes agregar a tus favoritos.
 
 ## Despliegue 📦
 
-Puedes ver el resultado de este proyecto [acá](http://animista.net).
+Puedes ver el resultado de este proyecto [acá](https://pokemon-global-challenge.netlify.app/).
